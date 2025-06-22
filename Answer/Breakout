@@ -1,0 +1,108 @@
+from graphics import Canvas
+import time
+import random
+import math
+
+CANVAS_WIDTH = 500
+CANVAS_HEIGHT = 600
+PADDLE_Y = CANVAS_HEIGHT - 30
+PADDLE_WIDTH = 80
+PADDLE_HEIGHT = 15
+BALL_RADIUS = 10
+
+BRICK_GAP = 5
+BRICK_WIDTH = (CANVAS_WIDTH - BRICK_GAP*9) // 10
+BRICK_HEIGHT = 10
+
+def brick_set(canvas,x,y,color):
+    bricks=[]
+    for _ in range(2):
+        x=0
+        for _ in range(CANVAS_WIDTH//BRICK_WIDTH):
+            brick=canvas.create_rectangle(
+                x, y, x+BRICK_WIDTH, y+BRICK_HEIGHT, color)
+            bricks.append(brick)
+            x=x+BRICK_WIDTH+BRICK_GAP
+        y=y+BRICK_HEIGHT+BRICK_GAP  
+    return bricks
+
+def ball_set(canvas,bx,by,color):
+    return canvas.create_oval(
+            bx-BALL_RADIUS, 
+            by-BALL_RADIUS, 
+            bx+BALL_RADIUS, 
+            by+BALL_RADIUS, 
+            color
+        )
+
+def paddle_set(canvas,px,py,color):
+    return canvas.create_rectangle(
+        px, py, px+PADDLE_WIDTH, py+PADDLE_HEIGHT,color)
+
+def main():
+    canvas = Canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
+    x=0
+    y=40
+    bricks=[]
+    color_list=["red", "orange", "yellow", "green", "cyan"]
+    for i in color_list:
+        bricks=bricks+brick_set(canvas,x,y,i)
+        y=y+(BRICK_HEIGHT+BRICK_GAP)*2
+    print(bricks)
+    bx=200
+    by=250
+    vx=10
+    vy=10
+    ball=ball_set(canvas,bx,by,"black")
+    print(ball)
+
+    px=250
+    py=550
+    paddle=paddle_set(canvas,px,py,"black")
+    print(paddle)
+
+    while True:
+        time.sleep(0.1)
+        canvas.moveto(ball,bx,by)
+        bx=bx+vx
+        by=by+vy
+        if bx-BALL_RADIUS < 0 or bx+2*BALL_RADIUS >= CANVAS_WIDTH:
+            vx=-vx
+        if by-BALL_RADIUS < 0:
+            vy=-vy
+        if by-BALL_RADIUS > CANVAS_HEIGHT:
+            print("game over")
+            break
+        
+
+        mouse_x = canvas.get_mouse_x()
+        px=mouse_x-PADDLE_WIDTH/2
+        canvas.moveto(paddle,px,py)
+        
+        b_top=by-BALL_RADIUS
+        b_bottom=by+BALL_RADIUS
+        b_left=bx-BALL_RADIUS
+        b_right=bx+BALL_RADIUS
+
+        p_top=py
+        p_left=px
+        p_right=px+PADDLE_WIDTH
+
+        if b_bottom+vy >= p_top and p_left <= bx <= p_right:
+            vy=-vy
+
+        colliding_list = canvas.find_overlapping(b_left, b_top, b_right, b_bottom)
+        print(colliding_list)
+        for i in colliding_list:
+            if i in bricks:
+                canvas.delete(i)
+                bricks.remove(i)
+                vy = -vy    
+
+        if bricks==[]:
+            print("win")
+            break
+
+
+if __name__ == '__main__':
+    main()
