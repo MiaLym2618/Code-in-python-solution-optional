@@ -1,0 +1,64 @@
+from graphics import Canvas
+import time
+import random
+    
+CANVAS_WIDTH = 400
+CANVAS_HEIGHT = 400
+SIZE = 20
+
+# if you make this larger, the game will go slower
+DELAY = 0.1 
+
+def main():
+    canvas = Canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
+    x=0
+    y=0
+    goal_x=360
+    goal_y=360
+    start=square(canvas,x,y,"blue")
+    goal=square(canvas,goal_x,goal_y,"red")
+    while True:
+        time.sleep(DELAY)
+        key= canvas.get_last_key_press()
+        if key == 'ArrowLeft':
+            x=x-20
+
+        if key == 'ArrowRight':
+            x=x+20
+
+        if key == 'ArrowUp':
+            y=y-20  
+
+        if key == 'ArrowDown':
+            y=y+20  
+        
+        canvas.moveto(start,x,y)
+        
+        x_point = canvas.get_left_x(start)
+        y_point = canvas.get_top_y(start)
+        if x_point > CANVAS_WIDTH or x_point < 0:
+            print("Over line")
+            break
+        if y_point > CANVAS_HEIGHT or y_point < 0:
+            print("Over line")
+            break
+        
+        if x == goal_x and y == goal_y:
+            canvas.delete(goal)
+            goal_x = random.randint(0, (CANVAS_WIDTH-SIZE)//SIZE)*SIZE
+            goal_y = random.randint(0, (CANVAS_HEIGHT-SIZE)//SIZE)*SIZE
+            goal = square(canvas,goal_x,goal_y,"red")
+            print("Win")
+            
+        
+
+    print("game over")
+        
+
+
+def square(canvas,x,y,color):
+    return canvas.create_rectangle(x,y,x+20,y+20,color)
+        
+
+if __name__ == '__main__':
+    main()
