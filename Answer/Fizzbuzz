@@ -1,0 +1,21 @@
+MAX_VALUE = 17
+
+def main():
+    max_value=17
+    for i in range(1,max_value+1):
+        to_say = fizzbuzz(i)
+        print(to_say)
+
+def fizzbuzz(n):
+    if n%15==0:
+        return "Fizzbuzz"
+        
+    if n%3 == 0:
+        return "Fizz"
+    
+    if n%5 == 0:
+        return"Buzz"
+    return n
+
+if __name__ == '__main__':
+    main()
