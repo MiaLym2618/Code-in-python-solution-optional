@@ -22,8 +22,28 @@ Tracking my progress in lession Code In Python.
   - [Question](Question/Memory_Game)
   - [Answer](Answer/Memory_Game)
 
+- Fizzbuzz
+  - [Question](Question/Fizzbuzz)
+  - [Answer](Answer/Fizzbuzz)
+
+- two_sum
+  - [Question](Question/two_sum)
+  - [Answer](Answer/two_sum)
+
  ## Graphics project
 - Pyramid
   - [Question](Question/Pyramid)
   - [Answer](Answer/Pyramid)
+
+- Baby Snake
+  - [Question](Question/Baby_Snake)
+  - [Answer](Answer/Baby_Snake)
+ 
+- Follow me!
+  - [Question](Question/Follow_me)
+  - [Answer](Answer/Follow_me)
+ 
+- Breakout!
+  - [Question](Question/Breakout)
+  - [Answer](Answer/Breakout)
 
