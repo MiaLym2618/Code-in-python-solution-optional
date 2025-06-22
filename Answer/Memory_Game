@@ -1,0 +1,44 @@
+import random
+
+NUM_PAIRS = 3
+
+def main():
+    displayed=["*"]*NUM_PAIRS*2
+    truth=[i for i in range(NUM_PAIRS) for _ in range(2)]
+    random.shuffle(truth)
+
+    while truth != displayed:
+        print(displayed)
+        if "*" in displayed:
+            index_1=valid_index(displayed)
+            index_2=valid_index(displayed) 
+
+        if truth[index_1] == truth[index_2]:
+            displayed[index_1]=truth[index_1]
+            displayed[index_2]=truth[index_2]
+            print("Match!")
+            clear_terminal()
+      
+        else:
+            print(f"Value at index {index_1} is {truth[index_1]}")
+            print(f"Value at index {index_2} is {truth[index_2]}")
+            print("No match. Try again.")
+            enter=input("Press Enter to continue... ")
+
+    print(displayed)
+    print("Congratulations! You won!")
+
+def valid_index(displayed):
+    while True:
+        index=input("Enter an index: ")
+        if index.isdigit():
+            index=int(index)
+            if 0 <= index < NUM_PAIRS*2 and displayed[index] == "*":
+                return index
+
+def clear_terminal():
+    for i in range(20):
+      print('\n')
+
+if __name__ == '__main__':
+    main()
