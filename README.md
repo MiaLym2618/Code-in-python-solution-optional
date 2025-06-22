@@ -9,3 +9,7 @@ Tracking my progress in lession Code In Python.
   - [Question](Question/The_Game_of_Nimm)
   - [Answer](Answer/The_Game_of_Nimm)
 
+- Hailstone
+  - [Question](Question/Hailstone)
+  - [Answer](Answer/Hailstone)
+
