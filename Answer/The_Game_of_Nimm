@@ -1,0 +1,39 @@
+def main():
+    print("There are 20 stones left.")
+    stones=20
+    while stones>0:
+        try:
+            player1=int(input("Player 1 would you like to remove 1 or 2 stones? "))
+        except ValueError:
+            player1=int(input("Player 1 would you like to remove 1 or 2 stones? "))
+        while player1 != 1 and player1 != 2:
+            player1=int(input("Please enter 1 or 2: "))
+        stones=stones-player1
+        print()
+
+        if stones>0:
+            print(f"There are {stones} stones left.")
+        else:
+            print("Player 2 wins!")
+            break
+
+        try:
+            player2=int(input("Player 2 would you like to remove 1 or 2 stones? "))
+        except ValueError:
+            player2=int(input("Player 2 would you like to remove 1 or 2 stones? "))
+
+        while player2 != 1 and player2 != 2:
+            player2=int(input("Please enter 1 or 2: "))
+        print()
+        
+        stones=stones-player2
+        if stones>0:
+            print(f"There are {stones} stones left.")
+        else:
+            print("Player 1 wins!")
+            break
+        
+
+
+if __name__ == '__main__':
+    main()
